@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home"
+            android:title="@string/name_home" />
+        <item
+            android:id="@+id/nav_errors"
+            android:icon="@drawable/ic_errors"
+            android:title="@string/name_error" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/name_settings" />
+    </group>
+
+    <item android:title="Серивис">
+        <menu>
+            <item
+                android:id="@+id/nav_refresh"
+                android:icon="@drawable/ic_refresh"
+                android:title="@string/name_refresh" />
+        </menu>
+    </item>
+
+
+</menu>

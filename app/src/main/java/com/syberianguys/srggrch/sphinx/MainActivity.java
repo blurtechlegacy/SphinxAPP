@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static final String LOG_TAG = "MainActivity";
     ListView mList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity
                         Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, FlatListActivity.class);
                 intent.putExtra("position", position);
+                Log.d(LOG_TAG, "before start");
                 startActivity(intent);
                 //передать id тыкнутого элемента в FL
 

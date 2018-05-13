@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //sadad
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +54,11 @@ public class MainActivity extends AppCompatActivity
                 Toast.makeText(getApplicationContext(),
                         "Clicked" + position,
                         Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, FlatListActivity.class);
+                intent.putExtra("position", position);
+                startActivity(intent);
+                //передать id тыкнутого элемента в FL
+
             }
         });
         HLAdapter adapter = new HLAdapter(this, arrMake());

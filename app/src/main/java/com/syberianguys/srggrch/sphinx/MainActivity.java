@@ -17,7 +17,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -38,6 +37,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        if (mSettings.contains(APP_PREFERENCES_COUNTER)) {
+            // Получаем число из настроек
+            dbFlag = mSettings.getBoolean(APP_PREFERENCES_COUNTER,false);
+        }
         setContentView(R.layout.activity_main);
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
 
@@ -84,19 +88,22 @@ public class MainActivity extends AppCompatActivity
         editor.apply();
     }
 
-    private HLNames[] makeAddresses() {
+    private HouseSTR[] makeAddresses() {
         Cursor c;
-        c = mDB.query("addresses", new String[]{DBHelper.ADDRESSES_COLUMN_STREET},
+        c = mDB.query("addresses", new String[]{DBHelper.ADDRESSES_COLUMN_STREET, DBHelper.ADDRESSES_COLUMN_HOME},
                 null, null,
                 null, null, null);
 
+        HouseSTR[] house = new HouseSTR[c.getCount()];
+
         Log.d(LOG_TAG, "mC stared");
 
-        HLNames[] arr = new HLNames[c.getCount()];
+        HouseSTR[] arr = new HouseSTR[c.getCount()];
         c.moveToFirst();
         for (int i = 0; i < arr.length; i++) {
-            HLNames Name = new HLNames();
+            HouseSTR Name = new HouseSTR();
             Name.name = c.getString(c.getColumnIndex(DBHelper.ADDRESSES_COLUMN_STREET));
+            Name.number = c.getInt(c.getColumnIndex(DBHelper.ADDRESSES_COLUMN_HOME));
             c.moveToNext();
             arr[i] = Name;
         }
@@ -127,6 +134,13 @@ public class MainActivity extends AppCompatActivity
         editor.apply();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putBoolean(APP_PREFERENCES_COUNTER, dbFlag);
+        editor.apply();
+    }
 
     @Override
     public void onBackPressed() {
@@ -143,17 +157,6 @@ public class MainActivity extends AppCompatActivity
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
-    }
-
-    public HLNames[] arrMake(){
-        String s[] = {"1","2", "3", "4", "5", "6", "7", "8", "9", "10"};
-        HLNames[] arr = new HLNames[10];
-        for (int i = 0; i < 10; i++){
-            HLNames obj = new HLNames();
-            obj.name = s[i];
-            arr[i] = obj;
-        }
-        return arr;
     }
 
     @Override

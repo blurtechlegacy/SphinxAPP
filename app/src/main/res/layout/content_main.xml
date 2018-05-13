@@ -9,7 +9,7 @@
     tools:showIn="@layout/app_bar_main">
 
     <ListView
-        android:id="@+id/mList"
+        android:id="@+id/hList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="8dp"

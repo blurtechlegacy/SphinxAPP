@@ -1,6 +1,9 @@
 package com.syberianguys.srggrch.sphinx;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,7 +25,15 @@ public class MainActivity extends AppCompatActivity
 
     private static final String LOG_TAG = "MainActivity";
     ListView mList;
-    Button ind;
+    DBHelper DBHelper;
+    SQLiteDatabase mDB;
+    private boolean dbFlag;
+
+    // имя файла настройки
+    public static final String APP_PREFERENCES = "mysettings";
+    public static final String APP_PREFERENCES_COUNTER = "counter";
+    private SharedPreferences mSettings;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,9 +65,62 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
-        HLAdapter adapter = new HLAdapter(this, arrMake());
+
+        DBHelper = new DBHelper(this, "Sphinx.db", null, 1);
+        Log.d(LOG_TAG, "DBHelper");
+        mDB = DBHelper.getReadableDatabase();
+        Log.d(LOG_TAG, "DB get");
+        if(dbFlag == false){ dbFlag = true; DBHelper.onDBCreated(mDB);}
+
+
+
+        HLAdapter adapter = new HLAdapter(this, makeAddresses());
         mList.setAdapter(adapter);
     }
+
+    private HLNames[] makeAddresses() {
+        Cursor c;
+        c = mDB.query("name", new String[]{DBHelper.ADDRESSES_COLUMN_STREET},
+                null, null,
+                null, null, null);
+
+        Log.d(LOG_TAG, "mC stared");
+
+        HLNames[] arr = new HLNames[c.getCount()];
+        c.moveToFirst();
+        for (int i = 0; i < arr.length; i++) {
+            HLNames Name = new HLNames();
+            Name.name = c.getString(c.getColumnIndex(DBHelper.ADDRESSES_COLUMN_STREET));
+            c.moveToNext();
+            arr[i] = Name;
+        }
+        Log.d(LOG_TAG, "List arr done");
+        c.close();
+        return arr;
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Toast.makeText(getApplicationContext(), "Start", Toast.LENGTH_SHORT).show();
+        Log.d(LOG_TAG, "perf opened");
+        if (mSettings.contains(APP_PREFERENCES_COUNTER)) {
+            // Получаем число из настроек
+            dbFlag = mSettings.getBoolean(APP_PREFERENCES_COUNTER,false);
+        }
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Toast.makeText(getApplicationContext(), "Pause", Toast.LENGTH_SHORT).show();
+        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putBoolean(APP_PREFERENCES_COUNTER, dbFlag);
+        editor.apply();
+    }
+
 
     @Override
     public void onBackPressed() {

@@ -95,8 +95,47 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // Удаляем старую таблицу и создаём новую
+        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_FLATS);
+        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_HISTORY);
+        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_ADDRESSES);
 
+
+        // Создаём новые таблицы
+        onCreate(db);
+        //заполняем таблицы
+        onDBCreated(db);
     }
 
+
+
+    public void onDBCreated(SQLiteDatabase mDB){
+
+        mDB.execSQL("INSERT INTO `addresses` (`id`, `city`, `street`, `home`, `number`, `timestamp`) VALUES\n" +
+                "(1, 'Новосибирск', 'Ленина', 1, 89231321797, '2018-05-12 20:02:27'),\n" +
+                "(2, 'Новосибирск', 'Богаткова', 201, 89139745778, '2018-05-12 20:22:15');");
+
+        mDB. execSQL("INSERT INTO `flats` (`id`, `home_id`, `flat`, `security`, `fire_alarm`, `leak`, `magnet_field`, `timestamp`) VALUES\n" +
+                "(1, 1, 1, '1', '1', '1', '1', '2018-05-12 20:48:26'),\n" +
+                "(2, 1, 2, '1', '1', '0', '0', '2018-05-12 20:49:27'),\n" +
+                "(3, 2, 1, '1', '0', '1', '1', '2018-05-12 20:49:48'),\n" +
+                "(4, 2, 2, '1', '1', '1', '1', '2018-05-13 05:33:13'),\n" +
+                "(5, 2, 3, '1', '1', '1', '1', '2018-05-13 05:33:45'),\n" +
+                "(6, 2, 4, '1', '0', '1', '1', '2018-05-13 05:36:32'),\n" +
+                "(7, 1, 3, '0', '1', '1', '1', '2018-05-13 05:44:14');\n");
+
+        mDB.execSQL("INSERT INTO `history` (`id`, `flat_id`, `security`, `fire_alarm`, `leak`, `magnet_field`, `timestamp`) VALUES\n" +
+                "(1, 1, '1', '1', '1', '1', '2018-05-12 22:38:05'),\n" +
+                "(2, 1, '1', '1', '0', '1', '2018-05-12 22:38:26'),\n" +
+                "(3, 1, '1', '1', '1', '1', '2018-05-12 22:38:33'),\n" +
+                "(4, 1, '0', '1', '1', '1', '2018-05-12 22:38:47'),\n" +
+                "(5, 1, '1', '1', '1', '1', '2018-05-12 22:38:56'),\n" +
+                "(6, 2, '1', '1', '1', '1', '2018-05-12 22:39:19'),\n" +
+                "(7, 3, '1', '1', '1', '1', '2018-05-12 22:39:28'),\n" +
+                "(8, 3, '1', '0', '0', '0', '2018-05-12 22:39:42'),\n" +
+                "(9, 3, '1', '1', '1', '0', '2018-05-12 22:39:55'),\n" +
+                "(10, 3, '1', '1', '1', '1', '2018-05-12 22:40:09');");
+
+    }
 
 }

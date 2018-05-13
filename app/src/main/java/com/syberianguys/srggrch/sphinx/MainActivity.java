@@ -1,5 +1,6 @@
 package com.syberianguys.srggrch.sphinx;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -38,8 +39,11 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -72,15 +76,17 @@ public class MainActivity extends AppCompatActivity
         Log.d(LOG_TAG, "DB get");
         if(dbFlag == false){ dbFlag = true; DBHelper.onDBCreated(mDB);}
 
-
-
         HLAdapter adapter = new HLAdapter(this, makeAddresses());
         mList.setAdapter(adapter);
+
+        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putBoolean(APP_PREFERENCES_COUNTER, dbFlag);
+        editor.apply();
     }
 
     private HLNames[] makeAddresses() {
         Cursor c;
-        c = mDB.query("name", new String[]{DBHelper.ADDRESSES_COLUMN_STREET},
+        c = mDB.query("addresses", new String[]{DBHelper.ADDRESSES_COLUMN_STREET},
                 null, null,
                 null, null, null);
 

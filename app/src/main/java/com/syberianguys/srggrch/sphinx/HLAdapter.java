@@ -27,7 +27,6 @@ public class HLAdapter extends ArrayAdapter<HLNames> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.adapter_house, null);
         }
 
-        if (position == 5) ((ImageView) convertView.findViewById(R.id.houseIndicator)).setImageResource(R.drawable.color_error);
         // Заполняем адаптер
         ((TextView) convertView.findViewById(R.id.houseName)).setText(name.name);
         return convertView;

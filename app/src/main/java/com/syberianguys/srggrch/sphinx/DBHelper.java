@@ -72,7 +72,7 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
             + FLATS_COLUMN_TIMESTAMP + "TIMESTAMP NOT NULL);";
 
     private static final String DATABASE_CREATE_HISTORY = "CREATE TABLE IF NOT EXISTS " +
-            DATABASE_TABLE_FLATS + " (" + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            "history" + " (" + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + HISTORY_COLUMN_FLATID + " INTEGER NOT NULL, "
             + HISTORY_COLUMN_SECURITY + " TEXT NOT NULL, "
             + HISTORY_COLUMN_FIREALARM + " TEXT NOT NULL, "
@@ -111,30 +111,46 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
 
     public void onDBCreated(SQLiteDatabase mDB){
 
-        mDB.execSQL("INSERT INTO `addresses` (`id`, `city`, `street`, `home`, `number`, `timestamp`) VALUES\n" +
-                "(1, 'Новосибирск', 'Ленина', 1, 89231321797, '2018-05-12 20:02:27'),\n" +
-                "(2, 'Новосибирск', 'Богаткова', 201, 89139745778, '2018-05-12 20:22:15');");
+        mDB.execSQL("INSERT INTO `addresses` VALUES " +
+                "(null, 'Новосибирск', 'Ленина', 1, '2018-05-12 20:02:27')");
+        mDB.execSQL("INSERT INTO `addresses` VALUES " +
+                "(null, 'Новосибирск', 'Богаткова', 201, '2018-05-12 20:22:15');");
 
-        mDB. execSQL("INSERT INTO `flats` (`id`, `home_id`, `flat`, `security`, `fire_alarm`, `leak`, `magnet_field`, `timestamp`) VALUES\n" +
-                "(1, 1, 1, '1', '1', '1', '1', '2018-05-12 20:48:26'),\n" +
-                "(2, 1, 2, '1', '1', '0', '0', '2018-05-12 20:49:27'),\n" +
-                "(3, 2, 1, '1', '0', '1', '1', '2018-05-12 20:49:48'),\n" +
-                "(4, 2, 2, '1', '1', '1', '1', '2018-05-13 05:33:13'),\n" +
-                "(5, 2, 3, '1', '1', '1', '1', '2018-05-13 05:33:45'),\n" +
-                "(6, 2, 4, '1', '0', '1', '1', '2018-05-13 05:36:32'),\n" +
-                "(7, 1, 3, '0', '1', '1', '1', '2018-05-13 05:44:14');\n");
+        mDB. execSQL("INSERT INTO `flats` VALUES " +
+                "(null, 1, 1, '1', '1', '1', '1', '2018-05-12 20:48:26')");
+        mDB. execSQL("INSERT INTO `flats` VALUES " +
+                "(null, 1, 2, '1', '1', '0', '0', '2018-05-12 20:49:27')");
+        mDB. execSQL("INSERT INTO `flats` VALUES " +
+                "(null, 2, 1, '1', '0', '1', '1', '2018-05-12 20:49:48')");
+        mDB. execSQL("INSERT INTO `flats` VALUES " +
+                "(null, 2, 2, '1', '1', '1', '1', '2018-05-13 05:33:13')");
+        mDB. execSQL("INSERT INTO `flats` VALUES " +
+                "(null, 2, 3, '1', '1', '1', '1', '2018-05-13 05:33:45')");
+        mDB. execSQL("INSERT INTO `flats` VALUES " +
+                "(null, 2,  4, '1', '0', '1', '1', '2018-05-13 05:36:32')");
+        mDB. execSQL("INSERT INTO `flats` VALUES " +
+                "(null, 1, 3, '0', '1', '1', '1', '2018-05-13 05:44:14')");
 
-        mDB.execSQL("INSERT INTO `history` (`id`, `flat_id`, `security`, `fire_alarm`, `leak`, `magnet_field`, `timestamp`) VALUES\n" +
-                "(1, 1, '1', '1', '1', '1', '2018-05-12 22:38:05'),\n" +
-                "(2, 1, '1', '1', '0', '1', '2018-05-12 22:38:26'),\n" +
-                "(3, 1, '1', '1', '1', '1', '2018-05-12 22:38:33'),\n" +
-                "(4, 1, '0', '1', '1', '1', '2018-05-12 22:38:47'),\n" +
-                "(5, 1, '1', '1', '1', '1', '2018-05-12 22:38:56'),\n" +
-                "(6, 2, '1', '1', '1', '1', '2018-05-12 22:39:19'),\n" +
-                "(7, 3, '1', '1', '1', '1', '2018-05-12 22:39:28'),\n" +
-                "(8, 3, '1', '0', '0', '0', '2018-05-12 22:39:42'),\n" +
-                "(9, 3, '1', '1', '1', '0', '2018-05-12 22:39:55'),\n" +
-                "(10, 3, '1', '1', '1', '1', '2018-05-12 22:40:09');");
+//        mDB.execSQL("INSERT INTO `history` VALUES " +
+//                "(null, 1, '1', '1', '1', '1', '2018-05-12 22:38:05')" );
+//        mDB.execSQL("INSERT INTO `history` VALUES " +
+//                "(null, 1, '1', '1', '0', '1', '2018-05-12 22:38:26')" );
+//        mDB.execSQL("INSERT INTO `history` VALUES " +
+//                "(null, 1, '1', '1', '1', '1', '2018-05-12 22:38:33')" );
+//        mDB.execSQL("INSERT INTO `history` VALUES " +
+//                "(null, 1, '0', '1', '1', '1', '2018-05-12 22:38:47')" );
+//        mDB.execSQL("INSERT INTO `history` VALUES " +
+//                "(null, 1, '1', '1', '1', '1', '2018-05-12 22:38:56')" );
+//        mDB.execSQL("INSERT INTO `history` VALUES " +
+//                "(null, 2, '1', '1', '1', '1', '2018-05-12 22:39:19')" );
+//        mDB.execSQL("INSERT INTO `history` VALUES " +
+//                "(null, 3, '1', '1', '1', '1', '2018-05-12 22:39:28')" );
+//        mDB. execSQL("INSERT INTO `history` VALUES " +
+//                "(null, 3, '1', '0', '0', '0', '2018-05-12 22:39:42')" );
+//        mDB. execSQL("INSERT INTO `history` VALUES " +
+//                "(null, 3, '1', '1', '1', '0', '2018-05-12 22:39:55')");
+//        mDB. execSQL("INSERT INTO `history` VALUES " +
+//                "(null, 3, '1', '1', '1', '1', '2018-05-12 22:40:09');");
 
     }
 

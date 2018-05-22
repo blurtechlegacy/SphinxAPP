@@ -107,6 +107,19 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
         onDBCreated(db);
     }
 
+    public void onUpdate(SQLiteDatabase db){
+        // Удаляем старую таблицу и создаём новую
+        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_FLATS);
+        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_HISTORY);
+        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_ADDRESSES);
+
+
+        // Создаём новые таблицы
+        onCreate(db);
+        //заполняем таблицы
+        onDBCreated(db);
+    }
+
 
 
     public void onDBCreated(SQLiteDatabase mDB){
@@ -121,13 +134,13 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
         mDB. execSQL("INSERT INTO `flats` VALUES " +
                 "(null, 1, 2, '1', '1', '0', '0', '2018-05-12 20:49:27')");
         mDB. execSQL("INSERT INTO `flats` VALUES " +
-                "(null, 2, 1, '1', '0', '1', '1', '2018-05-12 20:49:48')");
+                "(null, 201, 1, '0', '0', '0', '0', '2018-05-12 20:49:48')");
         mDB. execSQL("INSERT INTO `flats` VALUES " +
-                "(null, 2, 2, '1', '1', '1', '1', '2018-05-13 05:33:13')");
+                "(null, 201, 2, '1', '1', '1', '1', '2018-05-13 05:33:13')");
         mDB. execSQL("INSERT INTO `flats` VALUES " +
-                "(null, 2, 3, '1', '1', '1', '1', '2018-05-13 05:33:45')");
+                "(null, 201, 3, '1', '1', '1', '1', '2018-05-13 05:33:45')");
         mDB. execSQL("INSERT INTO `flats` VALUES " +
-                "(null, 2,  4, '1', '0', '1', '1', '2018-05-13 05:36:32')");
+                "(null, 201,  4, '1', '0', '1', '1', '2018-05-13 05:36:32')");
         mDB. execSQL("INSERT INTO `flats` VALUES " +
                 "(null, 1, 3, '0', '1', '1', '1', '2018-05-13 05:44:14')");
 

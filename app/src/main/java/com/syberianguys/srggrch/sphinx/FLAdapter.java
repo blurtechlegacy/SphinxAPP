@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class FLAdapter extends ArrayAdapter<FlatSTR> {
@@ -23,6 +24,8 @@ public class FLAdapter extends ArrayAdapter<FlatSTR> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.adapter_flat, null);
         }
 
+        if ((name.security == 1) || (name.fire_alarm == 1) || (name.magnet_field == 1)  || (name.leak == 1))
+            ((ImageView) convertView.findViewById(R.id.flatIndicator)).setImageResource(R.drawable.color_error);
 
         // Заполняем адаптер
         ((TextView) convertView.findViewById(R.id.flatName)).setText(name.flat + " " + name.security

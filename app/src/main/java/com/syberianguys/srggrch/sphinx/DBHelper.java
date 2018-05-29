@@ -72,7 +72,7 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
             + FLATS_COLUMN_TIMESTAMP + "TIMESTAMP NOT NULL);";
 
     private static final String DATABASE_CREATE_HISTORY = "CREATE TABLE IF NOT EXISTS " +
-            DATABASE_TABLE_FLATS + " (" + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            "history" + " (" + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + HISTORY_COLUMN_FLATID + " INTEGER NOT NULL, "
             + HISTORY_COLUMN_SECURITY + " TEXT NOT NULL, "
             + HISTORY_COLUMN_FIREALARM + " TEXT NOT NULL, "
@@ -95,8 +95,75 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // Удаляем старую таблицу и создаём новую
+        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_FLATS);
+        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_HISTORY);
+        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_ADDRESSES);
 
+
+        // Создаём новые таблицы
+        onCreate(db);
+        //заполняем таблицы
+        onDBCreated(db);
     }
 
+    public  void onUpdate(SQLiteDatabase db){
+        // Удаляем старую таблицу и создаём новую
+        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_FLATS);
+        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_HISTORY);
+        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_ADDRESSES);
+
+
+        // Создаём новые таблицы
+        onCreate(db);
+        //заполняем таблицы
+        onDBCreated(db);
+    }
+
+
+    public void onDBCreated(SQLiteDatabase mDB){
+
+        mDB.execSQL("INSERT INTO `addresses` VALUES " +
+                "(1, 'Новосибирск', 'Ленина', 1, '2018-05-12 20:02:27')");
+        mDB.execSQL("INSERT INTO `addresses` VALUES " +
+                "(2, 'Новосибирск', 'Богаткова', 201, '2018-05-12 20:22:15');");
+
+        mDB. execSQL("INSERT INTO `flats` VALUES " +
+                "(1, 1, 1, '1', '1', '1', '1', '2018-05-12 20:48:26')");
+        mDB. execSQL("INSERT INTO `flats` VALUES " +
+                "(2, 1, 2, '1', '1', '0', '0', '2018-05-12 20:49:27')");
+        mDB. execSQL("INSERT INTO `flats` VALUES " +
+                "(3, 201, 1, '1', '0', '1', '1', '2018-05-12 20:49:48')");
+        mDB. execSQL("INSERT INTO `flats` VALUES " +
+                "(4, 201, 2, '1', '1', '1', '1', '2018-05-13 05:33:13')");
+        mDB. execSQL("INSERT INTO `flats` VALUES " +
+                "(5, 201, 3, '1', '1', '1', '1', '2018-05-13 05:33:45')");
+        mDB. execSQL("INSERT INTO `flats` VALUES " +
+                "(6, 201,  4, '1', '0', '1', '1', '2018-05-13 05:36:32')");
+        mDB. execSQL("INSERT INTO `flats` VALUES " +
+                "(7, 1, 3, '0', '1', '1', '1', '2018-05-13 05:44:14')");
+
+//        mDB.execSQL("INSERT INTO `history` VALUES " +
+//                "(null, 1, '1', '1', '1', '1', '2018-05-12 22:38:05')" );
+//        mDB.execSQL("INSERT INTO `history` VALUES " +
+//                "(null, 1, '1', '1', '0', '1', '2018-05-12 22:38:26')" );
+//        mDB.execSQL("INSERT INTO `history` VALUES " +
+//                "(null, 1, '1', '1', '1', '1', '2018-05-12 22:38:33')" );
+//        mDB.execSQL("INSERT INTO `history` VALUES " +
+//                "(null, 1, '0', '1', '1', '1', '2018-05-12 22:38:47')" );
+//        mDB.execSQL("INSERT INTO `history` VALUES " +
+//                "(null, 1, '1', '1', '1', '1', '2018-05-12 22:38:56')" );
+//        mDB.execSQL("INSERT INTO `history` VALUES " +
+//                "(null, 2, '1', '1', '1', '1', '2018-05-12 22:39:19')" );
+//        mDB.execSQL("INSERT INTO `history` VALUES " +
+//                "(null, 3, '1', '1', '1', '1', '2018-05-12 22:39:28')" );
+//        mDB. execSQL("INSERT INTO `history` VALUES " +
+//                "(null, 3, '1', '0', '0', '0', '2018-05-12 22:39:42')" );
+//        mDB. execSQL("INSERT INTO `history` VALUES " +
+//                "(null, 3, '1', '1', '1', '0', '2018-05-12 22:39:55')");
+//        mDB. execSQL("INSERT INTO `history` VALUES " +
+//                "(null, 3, '1', '1', '1', '1', '2018-05-12 22:40:09');");
+
+    }
 
 }

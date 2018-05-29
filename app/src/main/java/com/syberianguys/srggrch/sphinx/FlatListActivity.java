@@ -45,7 +45,7 @@ public class FlatListActivity extends AppCompatActivity {
         cr.moveToPosition(pos);
 //        int homeid[] = new int[cr.getCount()];
         for (int i = 0; i < arr.length; i++) {
-            if (c.getInt(c.getColumnIndex(DBHelper.FLATS_COLUMN_HOMEID)) == cr.getInt(cr.getColumnIndex(DBHelper.ADDRESSES_COLUMN_HOME))) {
+            if (c.getInt(c.getColumnIndex(DBHelper.FLATS_COLUMN_HOMEID)) == cr.getInt(cr.getColumnIndex(DBHelper._ID))) {
                 FlatSTR Name = new FlatSTR();
                 Name.flat = c.getInt(c.getColumnIndex(DBHelper.FLATS_COLUMN_FLAT));
                 Name.fire_alarm = c.getInt(c.getColumnIndex(DBHelper.FLATS_COLUMN_FIREALARM));

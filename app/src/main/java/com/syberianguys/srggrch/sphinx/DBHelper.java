@@ -107,7 +107,7 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
         onDBCreated(db);
     }
 
-    public void onUpdate(SQLiteDatabase db){
+    public  void onUpdate(SQLiteDatabase db){
         // Удаляем старую таблицу и создаём новую
         db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_FLATS);
         db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_HISTORY);
@@ -121,28 +121,27 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
     }
 
 
-
     public void onDBCreated(SQLiteDatabase mDB){
 
         mDB.execSQL("INSERT INTO `addresses` VALUES " +
-                "(null, 'Новосибирск', 'Ленина', 1, '2018-05-12 20:02:27')");
+                "(1, 'Новосибирск', 'Ленина', 1, '2018-05-12 20:02:27')");
         mDB.execSQL("INSERT INTO `addresses` VALUES " +
-                "(null, 'Новосибирск', 'Богаткова', 201, '2018-05-12 20:22:15');");
+                "(2, 'Новосибирск', 'Богаткова', 201, '2018-05-12 20:22:15');");
 
         mDB. execSQL("INSERT INTO `flats` VALUES " +
-                "(null, 1, 1, '1', '1', '1', '1', '2018-05-12 20:48:26')");
+                "(1, 1, 1, '1', '1', '1', '1', '2018-05-12 20:48:26')");
         mDB. execSQL("INSERT INTO `flats` VALUES " +
-                "(null, 1, 2, '1', '1', '0', '0', '2018-05-12 20:49:27')");
+                "(2, 1, 2, '1', '1', '0', '0', '2018-05-12 20:49:27')");
         mDB. execSQL("INSERT INTO `flats` VALUES " +
-                "(null, 201, 1, '0', '0', '0', '0', '2018-05-12 20:49:48')");
+                "(3, 201, 1, '1', '0', '1', '1', '2018-05-12 20:49:48')");
         mDB. execSQL("INSERT INTO `flats` VALUES " +
-                "(null, 201, 2, '1', '1', '1', '1', '2018-05-13 05:33:13')");
+                "(4, 201, 2, '1', '1', '1', '1', '2018-05-13 05:33:13')");
         mDB. execSQL("INSERT INTO `flats` VALUES " +
-                "(null, 201, 3, '1', '1', '1', '1', '2018-05-13 05:33:45')");
+                "(5, 201, 3, '1', '1', '1', '1', '2018-05-13 05:33:45')");
         mDB. execSQL("INSERT INTO `flats` VALUES " +
-                "(null, 201,  4, '1', '0', '1', '1', '2018-05-13 05:36:32')");
+                "(6, 201,  4, '1', '0', '1', '1', '2018-05-13 05:36:32')");
         mDB. execSQL("INSERT INTO `flats` VALUES " +
-                "(null, 1, 3, '0', '1', '1', '1', '2018-05-13 05:44:14')");
+                "(7, 1, 3, '0', '1', '1', '1', '2018-05-13 05:44:14')");
 
 //        mDB.execSQL("INSERT INTO `history` VALUES " +
 //                "(null, 1, '1', '1', '1', '1', '2018-05-12 22:38:05')" );

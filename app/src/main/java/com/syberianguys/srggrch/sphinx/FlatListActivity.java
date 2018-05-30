@@ -32,6 +32,7 @@ public class FlatListActivity extends AppCompatActivity {
         fList.setAdapter(adapter);
 
     }
+    @SuppressWarnings("AccessStaticViaInstance")
     private FlatSTR[] makeFlats(int position) {
         Cursor c;
         c = mDB.query("flats", new String[]{DBHelper.FLATS_COLUMN_FLAT, DBHelper.FLATS_COLUMN_FIREALARM, DBHelper.FLATS_COLUMN_MAGNETFIELD, DBHelper.FLATS_COLUMN_LEAK, DBHelper.FLATS_COLUMN_SECURITY, DBHelper.FLATS_COLUMN_HOMEID},
@@ -46,7 +47,6 @@ public class FlatListActivity extends AppCompatActivity {
         c.moveToFirst();
         cA.moveToPosition(position);
         int size = 0;
-        int x = c.getCount();
         for (int i = 0; i < c.getCount(); i++) {
 
             if (c.getInt(c.getColumnIndex(DBHelper.FLATS_COLUMN_HOMEID)) == cA.getInt(cA.getColumnIndex(BaseColumns._ID))) {
@@ -71,7 +71,8 @@ public class FlatListActivity extends AppCompatActivity {
             c.moveToNext();
         }
 
-            c.close();
+        c.close();
+        cA.close();
             return arr;
 
     }

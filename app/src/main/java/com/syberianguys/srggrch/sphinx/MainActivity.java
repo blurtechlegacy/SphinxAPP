@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity
         Log.d(LOG_TAG, "DBHelper");
         mDB = DBHelper.getReadableDatabase();
         Log.d(LOG_TAG, "DB get");
-        if(dbFlag == false){ dbFlag = true; DBHelper.onDBCreated(mDB);}
+        if(!dbFlag){ dbFlag = true; DBHelper.onDBCreated(mDB);}
 
         HLAdapter adapter = new HLAdapter(this, makeAddresses());
         mList.setAdapter(adapter);
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity
 
     private HouseSTR[] makeAddresses() {
         Cursor c;
-        c = mDB.query("addresses", new String[]{DBHelper.ADDRESSES_COLUMN_STREET, DBHelper.ADDRESSES_COLUMN_HOME},
+        c = mDB.query("addresses", new String[]{com.syberianguys.srggrch.sphinx.DBHelper.ADDRESSES_COLUMN_STREET, com.syberianguys.srggrch.sphinx.DBHelper.ADDRESSES_COLUMN_HOME},
                 null, null,
                 null, null, null);
 
@@ -103,8 +103,8 @@ public class MainActivity extends AppCompatActivity
         c.moveToFirst();
         for (int i = 0; i < arr.length; i++) {
             HouseSTR Name = new HouseSTR();
-            Name.name = c.getString(c.getColumnIndex(DBHelper.ADDRESSES_COLUMN_STREET));
-            Name.number = c.getInt(c.getColumnIndex(DBHelper.ADDRESSES_COLUMN_HOME));
+            Name.name = c.getString(c.getColumnIndex(com.syberianguys.srggrch.sphinx.DBHelper.ADDRESSES_COLUMN_STREET));
+            Name.number = c.getInt(c.getColumnIndex(com.syberianguys.srggrch.sphinx.DBHelper.ADDRESSES_COLUMN_HOME));
             c.moveToNext();
             arr[i] = Name;
         }
@@ -117,7 +117,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onStart() {
         super.onStart();
-        Toast.makeText(getApplicationContext(), "Start", Toast.LENGTH_SHORT).show();
         Log.d(LOG_TAG, "perf opened");
         if (mSettings.contains(APP_PREFERENCES_COUNTER)) {
             // Получаем число из настроек
@@ -129,7 +128,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onPause() {
         super.onPause();
-        Toast.makeText(getApplicationContext(), "Pause", Toast.LENGTH_SHORT).show();
         SharedPreferences.Editor editor = mSettings.edit();
         editor.putBoolean(APP_PREFERENCES_COUNTER, dbFlag);
         editor.apply();

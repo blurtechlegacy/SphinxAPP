@@ -137,11 +137,11 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
         mDB. execSQL("INSERT INTO `flats` VALUES " +
                 "(3, 201, 1, '1', '0', '1', '1', '2018-05-12 20:49:48')");
         mDB. execSQL("INSERT INTO `flats` VALUES " +
-                "(4, 201, 2, '1', '1', '1', '1', '2018-05-13 05:33:13')");
+                "(4, 201, 2, '0', '0', '0', '0', '2018-05-13 05:33:13')");
         mDB. execSQL("INSERT INTO `flats` VALUES " +
                 "(5, 201, 3, '1', '1', '1', '1', '2018-05-13 05:33:45')");
         mDB. execSQL("INSERT INTO `flats` VALUES " +
-                "(6, 201,  4, '1', '0', '1', '1', '2018-05-13 05:36:32')");
+                "(6, 201, 4, '1', '0', '1', '1', '2018-05-13 05:36:32')");
         mDB. execSQL("INSERT INTO `flats` VALUES " +
                 "(7, 1, 3, '0', '1', '1', '1', '2018-05-13 05:44:14')");
 

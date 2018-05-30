@@ -1,9 +1,11 @@
 package com.syberianguys.srggrch.sphinx;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.AsyncTask;
 import android.provider.BaseColumns;
 
 
@@ -55,14 +57,14 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
 
     // создание базы данных
     private static final String DATABASE_CREATE_ADDRESSES = "CREATE TABLE IF NOT EXISTS "
-            + DATABASE_TABLE_ADDRESSES + " (" + BaseColumns._ID + " integer primary key autoincrement, "
+            + DATABASE_TABLE_ADDRESSES + " (" + BaseColumns._ID + " integer PRIMARY KEY, "
             + ADDRESSES_COLUMN_CITY + " text not null, "
             + ADDRESSES_COLUMN_STREET + " text not null,"
             + ADDRESSES_COLUMN_HOME + " INTEGER NOT NULL, "
             + ADDRESSES_COLUMN_TIMESTAMP + " TIMESTAMP NOT NULL);";
 
     private static final String DATABASE_CREATE_FLATS = "CREATE TABLE IF NOT EXISTS " +
-            DATABASE_TABLE_FLATS + " (" + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            DATABASE_TABLE_FLATS + " (" + BaseColumns._ID + " INTEGER PRIMARY KEY, "
             + FLATS_COLUMN_HOMEID + " INTEGER NOT NULL, "
             + FLATS_COLUMN_FLAT + " INTEGER NOT NULL, "
             + FLATS_COLUMN_SECURITY + " TEXT NOT NULL, "
@@ -72,7 +74,7 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
             + FLATS_COLUMN_TIMESTAMP + "TIMESTAMP NOT NULL);";
 
     private static final String DATABASE_CREATE_HISTORY = "CREATE TABLE IF NOT EXISTS " +
-            "history" + " (" + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            "history" + " (" + BaseColumns._ID + " INTEGER PRIMARY KEY, "
             + HISTORY_COLUMN_FLATID + " INTEGER NOT NULL, "
             + HISTORY_COLUMN_SECURITY + " TEXT NOT NULL, "
             + HISTORY_COLUMN_FIREALARM + " TEXT NOT NULL, "
@@ -165,5 +167,4 @@ public class DBHelper extends SQLiteOpenHelper implements BaseColumns {
 //                "(null, 3, '1', '1', '1', '1', '2018-05-12 22:40:09');");
 
     }
-
 }

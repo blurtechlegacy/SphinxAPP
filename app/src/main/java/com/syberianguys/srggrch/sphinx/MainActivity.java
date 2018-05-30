@@ -188,8 +188,6 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.nav_refresh) {
-//            Snackbar.make(this, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                    .setAction("Action", null).show();
             DBHelper.onUpdate(mDB);
             Toast.makeText(this, "DB Updated", Toast.LENGTH_SHORT).show();
         }

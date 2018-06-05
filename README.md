@@ -4,7 +4,8 @@ Android mobile application for our ENERGY HACK hackathon project in NSTU
 
 ## Authors
 
-* **Sergey Grechishnikov** - *Main contributor* - [SrgGrch](https://github.com/SrgGrch)
+* **Sergey Grechishnikov** - *Main contributor* - [SrgGrch](https://github.com/SrgGrch)  
+[![Twitter Follow](https://img.shields.io/twitter/follow/SrgGrch.svg?style=social&label=Follow)](https://twitter.com/SrgGrch)
 
 See also the list of [contributors](https://github.com/blurtech/SphinxAPP/contributors) who participated in this project.
 
